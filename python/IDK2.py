@@ -1,6 +1,8 @@
 import numpy as np
 import sys
 from iNNE_IK import *
+from sklearn.metrics import roc_auc_score
+
 
 # 计算多个分布基于近似最近邻的核矩阵
 def idk_kernel_map(list_of_distributions, psi, t=100):
@@ -45,11 +47,9 @@ def idk_square(list_of_distributions, psi1,  psi2, t1=100, t2=100):
     return idk_score
 
 # point anomaly detector
-def idk_anomalyDetector(data, psi, t=100):
+def idk_anomalyDetector(data, psi, t=100, labels=None):
     inne_ik = iNN_IK(psi, t)
     idk_map = inne_ik.fit_transform(data).toarray()
     idkm_mean = np.average(idk_map, axis=0) / t
     idk_score = np.dot(idk_map, idkm_mean.T)
-    #auc = roc_auc_score(labels, idk_score)
     return idk_score
-
