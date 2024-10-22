@@ -1,8 +1,8 @@
 import numpy as np
 import sys
-#sys.path.append("/home/wangyf/trajectoryProject")
 from iNNE_IK import *
 
+# 计算多个分布基于近似最近邻的核矩阵
 def idk_kernel_map(list_of_distributions, psi, t=100):
     """
     :param list_of_distributions:
@@ -11,9 +11,13 @@ def idk_kernel_map(list_of_distributions, psi, t=100):
     :return: idk kernel matrix of shape (n_distributions, n_distributions)
     """
 
+    # 每个分布在alldata中的起始，终止索引
     D_idx = [0]  # index of each distributions
+
+    # 将所有分布数据整合到一个大的numpy数组中
     alldata = []
     n = len(list_of_distributions)
+
     for i in range(1, n + 1):
         D_idx.append(D_idx[i - 1] + len(list_of_distributions[i - 1]))
         alldata += list_of_distributions[i - 1]
@@ -29,6 +33,7 @@ def idk_kernel_map(list_of_distributions, psi, t=100):
 
     return idkmap
 
+# group anamoly detector
 def idk_square(list_of_distributions, psi1,  psi2, t1=100, t2=100):
     idk_map1 = idk_kernel_map(list_of_distributions, psi1, t1)
     #np.save(idkmapsavepath + "/idkmap1_psi1_"+str(psi1)+".npy", idk_map1)
@@ -39,6 +44,7 @@ def idk_square(list_of_distributions, psi1,  psi2, t1=100, t2=100):
     idk_score = np.dot(idk_map2, idkm2_mean.T)
     return idk_score
 
+# point anomaly detector
 def idk_anomalyDetector(data, psi, t=100):
     inne_ik = iNN_IK(psi, t)
     idk_map = inne_ik.fit_transform(data).toarray()
