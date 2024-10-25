@@ -8,8 +8,8 @@ from sklearn.metrics import roc_auc_score
 def idk_kernel_map(list_of_distributions, psi, t=100):
     """
     :param list_of_distributions:
-    :param psi:
-    :param t:
+    :param psi: subsample size
+    :param t: iteration times
     :return: idk kernel matrix of shape (n_distributions, n_distributions)
     """
 
