@@ -3,18 +3,21 @@ from IDK2 import *
 from sklearn.metrics import roc_auc_score
 
 if __name__ == '__main__':
-    # Load data
-    name = "PenDigits"
+    """ name = "PenDigits"
     data = loadmat(f'dataset/data_{name}.mat')
     X = data['fea']
     y = data['gt']
-    idk_score = idk_anomalyDetector(X, psi=500, t=100)
+    idk_score = idk_anomalyDetector(X, psi=500, t=100) """
 
+    X = np.array([[0, 1],
+                  [1, 2], 
+                  [2, 3], 
+                  [3, 4], 
+                  [1000, 1000]])
+    
+    idk_score = idk_anomalyDetector(X, psi=2, t=1)
 
-    idk_score_array = np.array(idk_score)
-    top_20_indices = np.argsort(idk_score_array)[-20:][::-1]
-    top_20_y_values = np.array(y)[top_20_indices]
+    print("idk_score: ")
+    print(idk_score)
 
-
-    print(f'IDK score: {idk_score}')
-    print(f"top 20 indices: {top_20_y_values}")
+    # idk_score 越高越是异常点还是越低越是异常点 ? 
