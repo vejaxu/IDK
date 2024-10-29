@@ -15,7 +15,7 @@ if __name__ == '__main__':
                   [3, 4], 
                   [1000, 1000]])
     
-    idk_score = idk_anomalyDetector(X, psi=2, t=1)
+    idk_score = idk_anomalyDetector(X, psi=3, t=10)
 
     print("idk_score: ")
     print(idk_score)
