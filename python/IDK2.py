@@ -57,5 +57,6 @@ def idk_anomalyDetector(data, psi, t=100):
     print("idkm_mean: ")
     print(idkm_mean)
     print(f"idkm_mean_length: {len(idkm_mean)}")
+    print(f"idkm_mean shape: {idkm_mean.shape}")
     idk_score = np.dot(idk_map, idkm_mean.T)
     return idk_score
