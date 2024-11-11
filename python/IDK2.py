@@ -49,14 +49,8 @@ def idk_square(list_of_distributions, psi1,  psi2, t1=100, t2=100):
 # point anomaly detector
 def idk_anomalyDetector(data, psi, t=100):
     inne_ik = iNN_IK(psi, t)
-    idk_map = inne_ik.fit_transform(data).toarray()
-    print("idk_map: ")
-    print(idk_map)
-    print(f"idk_map_shape: {idk_map.shape}")
-    idkm_mean = np.average(idk_map, axis=0) / t
-    print("idkm_mean: ")
-    print(idkm_mean)
-    print(f"idkm_mean_length: {len(idkm_mean)}")
-    print(f"idkm_mean shape: {idkm_mean.shape}")
-    idk_score = np.dot(idk_map, idkm_mean.T)
-    return idk_score
+    ik_feature_map = inne_ik.fit_transform(data).toarray()
+    idkm_mean = np.average(ik_feature_map, axis=0) / t
+    idk_score = np.dot(ik_feature_map, idkm_mean.T)
+
+    return ik_feature_map, idk_score
