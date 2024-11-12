@@ -10,7 +10,7 @@ if __name__ == '__main__':
                   [3, 4], 
                   [1000, 1000]])
     
-    ik_feature_map, idk_score = idk_anomalyDetector(X, psi=3, t=10)
+    ik_feature_map, idk_score = idk_anomalyDetector(X, psi=2, t=5)
 
     mu_r = np.mean(idk_score)
     sigma_r = np.var(idk_score)
